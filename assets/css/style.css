@@ -183,6 +183,57 @@ img{
     font-size:25px;
 }
 
+/*Google map in contactus.php */
+#map-container{
+    width: 100%;
+    height: 400px;
+    margin-bottom: 2em;
+}
+
+/*Styles for Aboutus.php */
+.bg-1{
+    background-color: #9fa8a3;
+    color:#ffffff;
+    padding: 3em 5%;
+    text-align: left;
+}
+
+.bg-1 h1, .bg-2 h1, .bg-3 h1{
+    font-size: 3.5em;
+}
+
+.bg-1 p{
+    font-size: 1em;
+}
+
+.logo1 {
+    font-size: 13em !important;
+}
+
+.bg-2{
+    background: #FDF3E7;
+    color: #3B3738;
+    padding: 2em 5%;
+
+}
+
+
+.bg-3{
+    background: #7D1935;
+    color: #ffffff;
+    padding: 2em 5%;
+    margin-bottom: 5em;
+}
+
+.logo2 {
+    font-size: 1.5em !important;
+}
+
+.partnerlogo{
+    padding: 1em 0;
+}
+
+
 
 /* make sidebar nav vertical */
 

@@ -2,11 +2,17 @@ $(document).ready(function(){
 	$("#modal-registerLink").click(function(){
 		$("#modal-loginForm").hide();
 		$("#modal-registerForm").show();
+		$("#modal-loginForm")[0].reset(); //Take in Use JavaScript not JQuery
+		clearErrorMsg($("#err-msg-username-login"));
+		clearErrorMsg($("#err-msg-pwd-login"));
 		$("#modal-formTitle").html("Register");
 	});
 	$("#modal-loginLink").click(function(){
 		$("#modal-loginForm").show();
 		$("#modal-registerForm").hide();
+		$("#modal-registerForm")[0].reset(); //Take in Use JavaScript not JQuery
+		clearErrorMsg($("#err-msg-username-register"));
+		clearErrorMsg($("#err-msg-pwd-register"));
 		$("#modal-formTitle").html("Login");
 	});
 	$("#modal-loginLink").click();
@@ -46,4 +52,6 @@ $(document).ready(function(){
 		$(".modal-show-product-id").val($(this).find(".thumbnail-id").html());
 		$(".modal-show-product-price").val($(this).find(".thumbnail-hidden-price").html());
 	});
+
+	
 });

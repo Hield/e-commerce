@@ -15,28 +15,38 @@
 			<!-- Modal body -->
 					
 			<div class="modal-body">
+				
+				<!-- Modal Login Form -->
+				
 				<form id="modal-loginForm" role="form" action="index.php?controller=users&action=login" method="post">
 					<div class="form-group">
 						<label for="modal-login-username">Username: </label>
+						<span id="err-msg-username-login"></span>
 						<input type="text" class="form-control" name="username" id="modal-login-username">
 					</div>
 					<div class="form-group">
 						<label for="modal-login-pwd">Password: </label>
-						<input type="password" class="form-control" name="pwd" id="modal-login-pwd"> 
+						<span id="err-msg-pwd-login"></span>
+						<input type="password" class="form-control" name="pwd" id="modal-login-pwd">
 					</div>
 					<button type="submit" class="btn btn-default">Login</button>
 					<a href="#" id="modal-registerLink"><p>Register</p></a>
 				</form>
+				
+				<!-- Modal Register Form -->
+
 				<form id="modal-registerForm" role="form" action="index.php?controller=users&action=register" method="post">
 					<div class="form-group">
 						<label for="modal-register-username">Username: </label>
+						<span id="err-msg-username-register"></span>
 						<input type="text" class="form-control" name="username" id="modal-register-username">
 					</div>
 					<div class="form-group">
 						<label for="modal-register-pwd">Password: </label>
-						<input type="password" class="form-control" name="pwd" id="modal-register-pwd"> 
+						<span id="err-msg-pwd-register"></span>
+						<input type="password" class="form-control" name="pwd" id="modal-register-pwd">
 					</div>
-					<button type="submit" class="btn btn-default">Register</button>
+					<button type="submit" class="btn btn-default" id="btn_register">Register</button>
 					<a href="#" id="modal-loginLink"><p>Login</p></a>
 				</form>
 			</div>

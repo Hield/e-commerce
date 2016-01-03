@@ -34,7 +34,6 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="assets/js/function.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5RQnHQFmYJjdqsOXnYjAGJxDhu7jUPs8"></script>
-		<script type="text/javascript" src="assets/js/map.js"></script>
+		<script type="text/javascript" src="assets/js/inputValidation.js"></script>
 	</body>
 </html>

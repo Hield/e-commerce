@@ -21,10 +21,11 @@
 			if (!isset($_POST['username']) || !isset($_POST['pwd'])){
 				return call('pages','error');
 			}
-			if (!User::isValid($_POST['username'])){
+			if (User::find_by_username($_POST['username'])){
 				$_SESSION['alert'] = "Username has been used!";
 				return header("Location: index.php");
-			} else {
+			}
+			else if (!User::find_by_username($_POST['username'])){
 				User::register($_POST['username'], $_POST['pwd']);
 				$_SESSION['notice'] = "Registered in successfully!";
 				header("Location: index.php");

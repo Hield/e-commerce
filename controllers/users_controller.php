@@ -7,7 +7,6 @@
 			$user = User::find($_POST['username'], $_POST['pwd']);
 			if (empty($user->id)){
 				$_SESSION['alert'] = "Wrong username or password!";
-				echo "Yoyo";
 				header("Location: index.php");
 			} else {
 				$_SESSION['id'] = $user->id;
@@ -79,6 +78,29 @@
 			}
 			PersonalInfo::update($id, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phone'], $_POST['address']);
 			$_SESSION['notice'] = "Change personal information successfully!";
+			return header("Location: index.php?controller=users&action=personal");
+		}
+		
+		public function change_password() {
+			if (!isset($_POST['old-password']) || !isset($_POST['new-password']) || !isset($_POST['new-password-again'])){
+				return call('page', 'error');
+			}
+			require('models/personal_info.php');
+			$user = User::find_by_username($_SESSION['username']);
+			if ($_POST['old-password'] == "" || $_POST['new-password'] == "" || $_POST['new-password-again'] == ""){
+				$_SESSION['notice'] = "Password change is not successful! (All the input fields were empty)!";
+			}
+			else if ($_POST['old-password'] != $user->pwd) {
+				$_SESSION['notice'] = "Password change is not successful! (Old password was incorrect)";
+
+			}
+			else if ($_POST['new-password'] != $_POST['new-password-again']) {
+				$_SESSION['notice'] = "Password change is not successful! (Retyped password field did not match)";
+			}
+			else {
+				User::update_password($_SESSION['username'], $_POST['new-password']);
+				$_SESSION['notice'] = "Change password successfully!";
+			}
 			return header("Location: index.php?controller=users&action=personal");
 		}
 	}

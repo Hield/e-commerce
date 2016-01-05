@@ -50,7 +50,12 @@
 			$req->execute(array('permission' => $permission, 'id' => $id));
 		}
 
-
+		public static function update_password($username, $pwd){
+			$db = Db::getInstance();
+			$req = $db->prepare('UPDATE users SET pwd = :pwd WHERE username = :username');
+			$req -> execute(array('username' => $username, 'pwd' => $pwd));
+		}
+		
 		public static function find_userName($username) {
 			$db = Db::getInstance();
 			$req = $db->prepare('SELECT * FROM users WHERE username = :username');
@@ -62,6 +67,5 @@
 			else
 				return new User($user['id'], $user['username'], $user['pwd'], $user['permission']);
 		}
-
 	}
 ?>

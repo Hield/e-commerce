@@ -184,6 +184,12 @@ img{
     font-size:25px;
 }
 
+/* Style for span element in personal.php */
+.err-msg{
+    padding-left: 15px;
+    padding-bottom: 5px;
+}
+
 /*Google map in contactus.php */
 #map-container{
     width: 100%;

@@ -56,7 +56,7 @@
 			$req -> execute(array('username' => $username, 'pwd' => $pwd));
 		}
 		
-		public static function find_userName($username) {
+		public static function find_by_username($username) {
 			$db = Db::getInstance();
 			$req = $db->prepare('SELECT * FROM users WHERE username = :username');
 			$req->execute(array('username' => $username));

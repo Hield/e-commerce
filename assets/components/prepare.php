@@ -1,4 +1,7 @@
 <?php
+	ini_set('display_errors', 'On');
+	error_reporting(E_ALL);
+	
 	if (isset($_GET['logout'])){
 		session_unset();
 		$_SESSION['notice'] = "Logged out successfully!";

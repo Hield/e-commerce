@@ -21,7 +21,7 @@ function userCheck(username0, pwd0){
 				type: "POST",
 				cache: false,
 				async: true,
-				url: "controllers/user_request.php",
+				url: "ajax/user_request.php",
 				data: {username: username0, pwd: pwd0},
 				dataType : "text"
 			});

@@ -1,4 +1,4 @@
-<?php
+<?php	
 	class UsersController {
 		public function login(){
 			if (!isset($_POST['username']) || !isset($_POST['pwd'])){

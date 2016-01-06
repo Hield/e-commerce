@@ -7,6 +7,8 @@ html{
     height:100%;
 }
 
+/* MODAL - LOGIN / REGISTER */
+
 #modal-registerLink {
     margin-top: 10px;
     float: right;
@@ -16,6 +18,8 @@ html{
     margin-top: 10px;
     float: right;
 }
+
+/* CAROUSEL */
 
 #carouselContainer {
     background-color: deepskyblue;
@@ -63,6 +67,8 @@ html{
     border:1px solid transparent;
     border-radius:4px;
 }
+
+/* FOOTER */
 
 .footer{
     bottom:0;
@@ -113,6 +119,8 @@ img{
     max-width:100%;
 }
 
+/* SHOW PRODUCT MODAL */
+
 #showProduct{
     top:15%;
 }
@@ -150,6 +158,8 @@ img{
     text-transform: uppercase;
 }
 
+/* SHOPPING BASKET */
+
 .total-price-division{
     margin-bottom:100px;
 }
@@ -171,7 +181,7 @@ img{
 
 .basket-table-description{
 
-    font-size:19px;
+    font-size:16px;
 }
 
 .basket-table-price{

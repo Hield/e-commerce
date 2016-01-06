@@ -31,20 +31,14 @@
 			return new User($user['id'], $user['username'], $user['pwd'], $user['permission']);
 		}
 
-		public static function isValid($username){
+		public static function register($username, $pwd){
 			$db = Db::getInstance();
 			$req = $db->prepare('SELECT * FROM users WHERE username = :username');
 			$req->execute(array('username' => $username));
 			$user = $req->fetch();
-			if (!empty($user)){
-				return false;
-			} else {
-				return true;
+			if (!empty($user['id'])){
+				return 0;
 			}
-		}
-
-		public static function register($username, $pwd){
-			$db = Db::getInstance();
 			$req = $db->prepare('INSERT INTO users(username, pwd) VALUES(:username,:pwd)');
 			$req->execute(array('username' => $username, 'pwd' => $pwd));
 		}
@@ -54,6 +48,24 @@
 			$req = $db->prepare('UPDATE users SET permission = :permission WHERE id = :id');
 			$id = intval($id);
 			$req->execute(array('permission' => $permission, 'id' => $id));
+		}
+
+		public static function update_password($username, $pwd){
+			$db = Db::getInstance();
+			$req = $db->prepare('UPDATE users SET pwd = :pwd WHERE username = :username');
+			$req -> execute(array('username' => $username, 'pwd' => $pwd));
+		}
+		
+		public static function find_by_username($username) {
+			$db = Db::getInstance();
+			$req = $db->prepare('SELECT * FROM users WHERE username = :username');
+			$req->execute(array('username' => $username));
+			$user = $req->fetch();
+			if(empty($user)){
+				return false;
+			}
+			else
+				return new User($user['id'], $user['username'], $user['pwd'], $user['permission']);
 		}
 	}
 ?>

@@ -11,7 +11,7 @@
 	if ($user) {
 		$checkUser['foundUserName'] = 1;
 		$databasePwd = $user->pwd;
-		if($databasePwd == $inputPwd){
+		if($databasePwd == sha1($inputPwd)){
 			$checkUser['pwdMatch'] = 1;
 		}
 	}

@@ -15,7 +15,7 @@
 		public static function find($username, $pwd){
 			$db = Db::getInstance();
 			$req = $db->prepare('SELECT * FROM users WHERE username = :username AND pwd = :pwd');
-			$req->execute(array('username' => $username, 'pwd' => $pwd));
+			$req->execute(array('username' => $username, 'pwd' => sha1($pwd)));
 			$user = $req->fetch();
 			if (empty($user)){
 				return 0;
@@ -40,7 +40,7 @@
 				return 0;
 			}
 			$req = $db->prepare('INSERT INTO users(username, pwd) VALUES(:username,:pwd)');
-			$req->execute(array('username' => $username, 'pwd' => $pwd));
+			$req->execute(array('username' => $username, 'pwd' => sha1($pwd)));
 		}
 
 		public static function set_permission($id, $permission){

@@ -7,7 +7,7 @@ function showError(el, msg0) {
 	el.show("slow");
 }
 
-/*-- Fundtions In Use--*/
+/*-- Functions In Use--*/
 
 function clearErrorMsg(el) {
 	if(el.text() != "") {

@@ -2,12 +2,22 @@
 	class OrdersController{
 
 		public function index(){
-			require('models/order_detail.php');
-			$orders = null;
+			$order = null;
 			if (isset($_SESSION['orderID'])){
-				$orders = OrderDetail::find($_SESSION['orderID']);
+				$order = Order::find($_SESSION['orderID']);
 			}
 			require_once('views/orders/index.php');
+		}
+
+		public function show(){
+			if (!isset($_GET['id'])){
+				return call('pages', 'error');
+			}
+			$order = null;
+			if ($_SESSION['permission'] = "admin" || $_SESSION['orderID'] == $_GET['id']){
+				$order = Order::find($_GET['id']);
+			}
+			require_once('views/orders/show.php');
 		}
 
 		public function create(){
@@ -25,13 +35,22 @@
 			if (!isset($_SESSION['orderID'])){
 				$_SESSION['orderID'] = Order::create($_SESSION['id']);
 			}
-			require('models/order_detail.php');
+			require_once('models/order_detail.php');
 			if (OrderDetail::check($_SESSION['orderID'], $_POST['product_id'])){
 				OrderDetail::setQuantity($_SESSION['orderID'], $_POST['product_id'], $_POST['quantity']);
 			} else {
 				OrderDetail::create($_SESSION['orderID'], $_POST['product_id'], $_POST['product_price'], $_POST['quantity']);
 			}	
 			$_SESSION['notice'] = "Added product to basket";
+			header("Location: index.php?controller=products&action=index");
+		}
+
+		public function save_order(){
+			if (!isset($_SESSION['orderID'])){
+				return call('pages', 'error');
+			}
+			Order::saveOrder($_SESSION['orderID']);
+			$_SESSION['notice'] = "Orders saved";
 			header("Location: index.php?controller=products&action=index");
 		}
 	}

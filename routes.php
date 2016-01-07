@@ -21,6 +21,7 @@
 			break;
 			case 'orders':
 				require_once('models/order.php');
+				//require_once('models/order_detail.php');
 				$controller = new OrdersController();
 			break;
 		}
@@ -34,7 +35,7 @@
 						 'posts'    => ['index','show'],
 						 'users'    => ['login','register','account','personal','setting','set_permission','change_info', 'change_password'],
 						 'products' => ['index', 'show', 'new', 'edit', 'create', 'update', 'destroy'],
-						 'orders'   => ['index', 'create']);
+						 'orders'   => ['index', 'show', 'create', 'save_order']);
 		
 	if (array_key_exists($controller, $controllers)){
 		if (in_array($action, $controllers[$controller])){

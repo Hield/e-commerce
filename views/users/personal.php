@@ -81,7 +81,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-5">
-							<div class="form-alert" id="change-personal-infos-alert">
+							<div class="form-alert" id="personal-infos-alert">
 							</div>
 						</div>
 					</div>
@@ -99,21 +99,21 @@
 				<hr>
 				<form class="form-horizontal js-change-password-form" role="form" method="post" action="<?php getLink('users','change_password'); ?>">
 					<div class="form-group">
-						<div class="col-sm-offset-3 err-msg" id="err-personal-old-password"></div>
+						<div class="col-sm-offset-3 err-msg" id="personal-old-password-error"></div>
 						<label class="control-label col-sm-3" for="personal-old-password">Old password: </label>
 						<div class="col-sm-5">
 							<input type="password" class="form-control" name="old-password" id="personal-old-password">
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-offset-3 err-msg" id="err-personal-new-password"></div>
+						<div class="col-sm-offset-3 err-msg" id="personal-new-password-error"></div>
 						<label class="control-label col-sm-3" for="personal-new-password">New password: </label>
 						<div class="col-sm-5">
 							<input type="password" class="form-control" name="new-password" id="personal-new-password">
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-offset-3 err-msg" id="err-personal-new-password-again"></div>
+						<div class="col-sm-offset-3 err-msg" id="personal-new-password-again-error"></div>
 						<label class="control-label col-sm-3" for="personal-new-password-again">Confirm new password: </label>
 						<div class="col-sm-5">
 							<input type="password" class="form-control" name="new-password-again" id="personal-new-password-again">

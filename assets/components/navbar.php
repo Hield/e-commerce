@@ -31,7 +31,7 @@
 				<li class="<?php if (isset($_GET["action"]) && $_GET["action"] == "home") { echo "active";}	else if (!isset($_GET["action"])) {echo "active";}?>"><a href="<?php getLink('pages','home'); ?>">Home</a></li>
 				<li class="<?php if (isset($_GET["controller"]) && $_GET["controller"]=="products"){ echo "active";} ?>"><a href="<?php getLink('products','index'); ?>">Products</a></li>
 				<?php if (isset($_SESSION["id"])){ ?>
-					<li class="<?php if ($_GET["controller"]=="orders" && $_GET["action"]=="index"){ echo "active"; } ?>"><a href="<?php getLink('orders', 'index'); ?>">Basket</a></li>
+					<li class="<?php if (isset($_GET["controller"]) && $_GET["controller"]=="orders" && $_GET["action"]=="index"){ echo "active"; } ?>"><a href="<?php getLink('orders', 'index'); ?>">Basket</a></li>
 					<li class=""><a href="">History</a></li>
 				<?php } ?>
 				<li class="<?php if (isset($_GET["action"]) && $_GET["action"]=="about"){ echo "active";} ?>"><a href="<?php getLink('pages','about'); ?>">About</a></li>

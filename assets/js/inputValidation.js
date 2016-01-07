@@ -111,7 +111,7 @@ $(document).ready(function(){
 	$("#modal-register-username").keyup( function(){
 		usernameStatus = false; //Global variable
 		var username = $(this).val();
-		var err_el = $("#msg-username-register-error");
+		var err_el = $("#modal-register-username-error");
 		var httpRequest = userCheck(username, "");
 
 		httpRequest
@@ -130,7 +130,7 @@ $(document).ready(function(){
 	/*--- Check password for register form ---*/
 
 	$("#modal-register-pwd").keyup( function() {
-		pwdStatus = pwdCheck($(this).val(),  $('#msg-pwd-register-error'));
+		pwdStatus = pwdCheck($(this).val(),  $("#modal-register-pwd-error"));
 	});
 
 	/*---- Check if input is empty when submitting register form----*/
@@ -138,8 +138,8 @@ $(document).ready(function(){
 	$("#modal-registerForm").submit( function() {
 		var username = $("#modal-register-username").val();
 		var pwd = $("#modal-register-pwd").val();
-		var err_el1 = $("-msg-username-register-error");
-		var err_el2 = $('#msg-pwd-register-error');
+		var err_el1 = $("#modal-register-username-error");
+		var err_el2 = $("#modal-register-pwd-error");
 
 		if (username === "") {
 			showError(err_el1, "(Username is empty)");
@@ -163,7 +163,7 @@ $(document).ready(function(){
 		var username = $(this).val();
 		var httpRequest = userCheck(username, "");
 
-		clearErrorMsg($("#msg-username-login-error"));
+		clearErrorMsg($("#modal-login-username-error"));
 
 		httpRequest
 				.done(function (data) {
@@ -183,7 +183,7 @@ $(document).ready(function(){
 		var pwd = $(this).val();
 		var httpRequest = userCheck(username, pwd);
 
-		clearErrorMsg($("#msg-pwd-login-error"));
+		clearErrorMsg($("#modal-login-pwd-error"));
 
 		if(usernameStatus == true){
 			httpRequest
@@ -202,8 +202,8 @@ $(document).ready(function(){
 	$("#modal-loginForm").submit( function() {
 		var username = $("#modal-login-username").val();
 		var pwd = $("#modal-login-pwd").val();
-		var err_el1 = $("#msg-username-login-error");
-		var err_el2 = $("#msg-pwd-login-error");
+		var err_el1 = $("#modal-login-username-error");
+		var err_el2 = $("#modal-login-pwd-error");
 
 		clearErrorMsg(err_el1);
 		clearErrorMsg(err_el2);

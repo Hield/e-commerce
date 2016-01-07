@@ -111,7 +111,7 @@ $(document).ready(function(){
 	$("#modal-register-username").keyup( function(){
 		usernameStatus = false; //Global variable
 		var username = $(this).val();
-		var err_el = $("#err-msg-username-register");
+		var err_el = $("#msg-username-register-error");
 		var httpRequest = userCheck(username, "");
 
 		httpRequest
@@ -130,7 +130,7 @@ $(document).ready(function(){
 	/*--- Check password for register form ---*/
 
 	$("#modal-register-pwd").keyup( function() {
-		pwdStatus = pwdCheck($(this).val(),  $('#err-msg-pwd-register'));
+		pwdStatus = pwdCheck($(this).val(),  $('#msg-pwd-register-error'));
 	});
 
 	/*---- Check if input is empty when submitting register form----*/
@@ -138,8 +138,8 @@ $(document).ready(function(){
 	$("#modal-registerForm").submit( function() {
 		var username = $("#modal-register-username").val();
 		var pwd = $("#modal-register-pwd").val();
-		var err_el1 = $("#err-msg-username-register");
-		var err_el2 = $('#err-msg-pwd-register');
+		var err_el1 = $("-msg-username-register-error");
+		var err_el2 = $('#msg-pwd-register-error');
 
 		if (username === "") {
 			showError(err_el1, "(Username is empty)");
@@ -163,7 +163,7 @@ $(document).ready(function(){
 		var username = $(this).val();
 		var httpRequest = userCheck(username, "");
 
-		clearErrorMsg($("#err-msg-username-login"));
+		clearErrorMsg($("#msg-username-login-error"));
 
 		httpRequest
 				.done(function (data) {
@@ -183,7 +183,7 @@ $(document).ready(function(){
 		var pwd = $(this).val();
 		var httpRequest = userCheck(username, pwd);
 
-		clearErrorMsg($("#err-msg-pwd-login"));
+		clearErrorMsg($("#msg-pwd-login-error"));
 
 		if(usernameStatus == true){
 			httpRequest
@@ -202,8 +202,8 @@ $(document).ready(function(){
 	$("#modal-loginForm").submit( function() {
 		var username = $("#modal-login-username").val();
 		var pwd = $("#modal-login-pwd").val();
-		var err_el1 = $("#err-msg-username-login");
-		var err_el2 = $("#err-msg-pwd-login");
+		var err_el1 = $("#msg-username-login-error");
+		var err_el2 = $("#msg-pwd-login-error");
 
 		clearErrorMsg(err_el1);
 		clearErrorMsg(err_el2);
@@ -235,14 +235,14 @@ $(document).ready(function(){
 
 	$("#personal-new-password").keyup( function(){
 		var pwd = $(this).val();
-		var err_el = $("#err-personal-new-password");
+		var err_el = $("#personal-new-password-error");
 		pwdCheck(pwd, err_el);
 	});
 
 	/*--- Clear the error message when typing again password in user change password form---*/
 
 	$("#personal-new-password-again").keyup( function(){
-		clearErrorMsg($("#err-personal-new-password-again"));
+		clearErrorMsg($("#personal-new-password-again-error"));
 	});
 
 	/*--- Check the old password in user change password form---*/
@@ -250,7 +250,7 @@ $(document).ready(function(){
 	$("#personal-old-password").keyup( function() {
 		var username = document.getElementById("username-session").childNodes[0].nodeValue.trim();
 		var pwd = $(this).val();
-		var err_el = $("#err-personal-old-password");
+		var err_el = $("#personal-old-password-error");
 		var httpRequest = userCheck(username, pwd);
 
 		clearErrorMsg(err_el);
@@ -268,9 +268,9 @@ $(document).ready(function(){
 		var oldPwd = $("#personal-old-password");
 		var newPwd = $("#personal-new-password");
 		var newPwdAgain = $("#personal-new-password-again");
-		var err_el1 = $("#err-change-password-form");
-		var err_el2 = $("#err-personal-new-password-again");
-		var err_el3 = $("#err-personal-old-password");
+		var err_el1 = $("#change-password-form-error");
+		var err_el2 = $("#personal-new-password-again-error");
+		var err_el3 = $("#personal-old-password-error");
 
 		if (oldPwd.val() == "" || newPwd.val() == "" || newPwdAgain.val() == "") {
 			showError(err_el1, "Please fill in all the fields");
@@ -290,13 +290,13 @@ $(document).ready(function(){
 			return  changePwdStatus;
 	});
 
-	$(".js-change-personal-infos-form").submit(function(){
+	$(".js-change-personal-infos-form").submit(function() {
 		var firstName_el = $("#personal-firstname");
 		var lastName_el = $("#personal-lastname");
 		var email_el = $("#personal-email");
 		var phone_el = $("#personal-phone");
 		var address_el = $("#personal-address");
-		var err_el =$("#err-personal-info");
+		var err_el =$("#personal-infos-alert");
 
 		if (firstName_el.val() == "" || lastName_el.val() == "" || email_el.val() == "" ||
 			phone_el.val() == "" || address_el.val() == "") {

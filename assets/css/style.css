@@ -116,7 +116,7 @@ html{
 }
 
 img{
-    width:100%;
+    max-width:100%;
 }
 
 /* SHOW PRODUCT MODAL */
@@ -167,6 +167,7 @@ img{
 .basket-table-img{
     max-width:100%;
     margin-bottom:0px;
+    width:100%;
 }
 
 .basket-table-quantity{
@@ -249,8 +250,6 @@ img{
 .partnerlogo{
     padding: 1em 0;
 }
-
-
 
 /* make sidebar nav vertical */
 

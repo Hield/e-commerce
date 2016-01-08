@@ -46,6 +46,10 @@
 			if (!isset($_POST['quantity']) || !isset($_POST['product_id']) || !isset($_POST['product_price'])){
 				return call('pages','error');
 			}
+			if (isAdmin()){
+				$_SESSION['alert'] = "Admin is not able to buy products"
+				return header("Location: index.php?controller=products&action=index"); 
+			}
 			if (!isset($_SESSION['id'])){
 				$_SESSION['alert'] = "Please log in before shopping";
 				return header("Location: index.php?controller=products&action=index");

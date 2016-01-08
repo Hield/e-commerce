@@ -10,7 +10,7 @@
 		<div class="container-fluid bg-1 text-center">
 			<div class="row">
 				<div class="col-sm-4 img-author">
-					 <img src="assets/img/slider1.png">
+					 <img src="assets/img/author_1.jpg">
 				</div>
 				<div class="col-sm-8">
 					<h1>HIEU LE</h1>

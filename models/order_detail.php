@@ -26,7 +26,6 @@
 		}
 
 		public static function find($orderID){
-			require('models/product.php');
 			$list = [];
 			$orderID = intval($orderID);
 			$db = Db::getInstance();

@@ -2,6 +2,8 @@
 	class OrdersController{
 
 		public function index(){
+			require('models/product.php');
+			require_once('models/order_detail.php');
 			$orders = Order::all();
 			require_once('views/orders/index.php');
 		}
@@ -11,6 +13,8 @@
 				return false;
 			}
 			$order = null;
+			require('models/product.php');
+			require_once('models/order_detail.php');
 			if (isAdmin()){
 				if (!isset($_GET['id'])){
 					return call('pages', 'error');

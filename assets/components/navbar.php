@@ -53,7 +53,7 @@
 								<?php } else { ?>
 									<span class="label label-primary">User</span> 
 								<?php }?>
-								<?php echo $_SESSION["username"]; ?>
+								<span id="username-session"><?php echo $_SESSION["username"]; ?></span>
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">

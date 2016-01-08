@@ -50,10 +50,10 @@
 			$req->execute(array('permission' => $permission, 'id' => $id));
 		}
 
-		public static function update_password($username, $pwd){
+		public static function change_password($username, $pwd){
 			$db = Db::getInstance();
 			$req = $db->prepare('UPDATE users SET pwd = :pwd WHERE username = :username');
-			$req -> execute(array('username' => $username, 'pwd' => $pwd));
+			$req -> execute(array('username' => $username, 'pwd' => sha1($pwd)));
 		}
 		
 		public static function find_by_username($username) {

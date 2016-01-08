@@ -248,7 +248,7 @@ $(document).ready(function(){
 	/*--- Check the old password in user change password form---*/
 
 	$("#personal-old-password").keyup( function() {
-		var username = document.getElementById("username-session").childNodes[0].nodeValue.trim();
+		var username = $("#username-session").text();
 		var pwd = $(this).val();
 		var err_el = $("#personal-old-password-error");
 		var httpRequest = userCheck(username, pwd);

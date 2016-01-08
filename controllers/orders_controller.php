@@ -47,7 +47,7 @@
 				return call('pages','error');
 			}
 			if (isAdmin()){
-				$_SESSION['alert'] = "Admin is not able to buy products"
+				$_SESSION['alert'] = "Admin is not able to buy products";
 				return header("Location: index.php?controller=products&action=index"); 
 			}
 			if (!isset($_SESSION['id'])){

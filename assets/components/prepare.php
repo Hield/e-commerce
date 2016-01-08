@@ -19,7 +19,29 @@
 		}
 	}
 	
-	function checkActive(){
-		
+	function checkActive($controller, $action){
+		if (!isset($_GET['controller']) || !isset($_GET['action'])){
+			if ($controller == "pages" && $action == "home"){
+				return true;
+			} else {
+				return false;
+			}
+		}
+		if ($_GET['controller'] == $controller && $_GET['action'] == $action){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function isAdmin(){
+		if (!isset($_SESSION['permission'])){
+			return false;
+		}
+		if ($_SESSION['permission'] == "admin"){
+			return true;
+		} else {
+			return false;
+		}
 	}
 ?>

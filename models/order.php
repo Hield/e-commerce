@@ -6,14 +6,34 @@
 		public $userID;
 		public $sum;
 		public $order_details;
+		public $username;
 
 		public function __construct($id, $date, $userID){
 			require_once('models/order_detail.php');
 			$this->id = $id;
 			$this->date = $date;
-			$this->userId = $userID;
+			$this->userID = $userID;
 			$this->order_details = OrderDetail::find($id);
 			$this->sum = $this->getSum();
+		}
+
+		public static function all(){
+			$list = [];
+			$db = Db::getInstance();
+			if ($_SESSION['permission'] == "admin"){
+				$req = $db->query('SELECT * FROM orders WHERE state = "saved"');
+			} else {
+				if (!isset($_SESSION['id'])){
+					return false;
+				} else {
+					$req = $db->prepare('SELECT * FROM orders WHERE userid = :userid AND state = "saved"');
+					$req->execute(array(':userid' => $_SESSION['id']));
+				}
+			} 
+			foreach($req->fetchAll() as $order){
+				$list[] = new Order($order['id'], $order['date'], $order['userid']);
+			}
+			return $list;
 		}
 
 		public static function find($id){
@@ -42,6 +62,24 @@
 			}
 		}
 
+		public static function isSaved($id){
+			if (!isset($_SESSION['id'])){
+				return false;
+			}
+			$id = intval($id);
+			$db = Db::getInstance();
+			$req = $db->prepare('SELECT * FROM orders WHERE id = :id');
+			$req->execute(array(':id' => $id));
+			$order = $req->fetch();
+			if (empty($order)){
+				return false;
+			}
+			if ($order['state'] != "saved" || $order['userid'] != $_SESSION['id']){
+				return false;
+			}
+			return true;
+		}
+
 		public static function create($userID){
 			$db = Db::getInstance();
 			$userID = intval($userID);
@@ -66,6 +104,21 @@
 				$sum = $sum + $order_detail->unitPrice * $order_detail->quantity;
 			}
 			return $sum;
+		}
+
+		public function getUser(){
+			if (!isset($this->username)){
+				$db = Db::getInstance();
+				$req = $db->prepare('SELECT username FROM users WHERE id = :id');
+				$req->execute(array(':id' => $this->userID));
+				$user = $req->fetch();
+				if (empty($user)){
+					$this->username = "Anonymous";
+				} else {
+					$this->username = $user['username'];
+				}
+			}
+			return $this->username;
 		}
 
 	}

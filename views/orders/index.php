@@ -1,55 +1,61 @@
 <div class="container">
-	<h1>Shopping Basket</h1>
-	<ol class="breadcrumb">
-		<li><a href="<?php echo $_SERVER['PHP_SELF'];?>">Home</a></li>
-		<li class="active">Basket</li>	
-	</ol>
-	<?php if (!isset($_SESSION['orderID']) || !isset($order)){ ?>
-		<h3>You have not added any product to your shopping basket </h3>
-	<?php } else if (count($order->order_details) == 0){ ?>
-		<h3>You have not added any product to your shopping basket </h3>
-	<?php } else { ?>
-		<h3>List of the items in your basket</h3>
-		<table class="table">
-			<thead>
-				<tr>
-					<th class="col-md-3">ITEM IMAGE</th>
-					<th class="col-md-3">ITEM DESCRIPTION</th>
-					<th class="col-md-3">ITEM QUANTITY</th>
-					<th class="col-md-3">TOTAL PRICE</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php foreach($order->order_details as $order_detail) { ?>
+	<?php if (isAdmin()){ ?>
+		<h1>Orders history</h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $_SERVER['PHP_SELF'];?>">Home</a></li>
+			<li class="active">Orders history</li>	
+		</ol>
+		<?php if (empty($orders)) { ?>
+			<h2>There aren't any orders</h2>
+		<?php } else { ?>
+			<table class="table">
+				<thead>
 					<tr>
-						<td class="col-md-3"><img class="basket-table-img" src="<?php echo $order_detail->product->img_src ?>"></td>
-						<td>
-							<p class="basket-table-name"><?php echo $order_detail->product->name ?></p>
-							<p  class="basket-table-description"><b>Description:</b> <?php echo $order_detail->product->description ?></p>
-							<p  class="basket-table-description"><b>Manufacturing date:</b> <?php echo $order_detail->product->date ?></p>
-						</td>
-						<td class="basket-table-quantity"><?php echo $order_detail->quantity ?></td>
-						<td class="basket-table-price">€<?php echo $order_detail->quantity * $order_detail->unitPrice; ?></td>
+						<th class="col-md-3">Order ID</th>
+						<th class="col-md-3">Date</th>
+						<th class="col-md-3">User</th>
+						<th class="col-md-3">Details</a></th>
 					</tr>
-				<?php } ?>
-			</tbody>
-		</table>
-		<div class="row total-price-division">
-			<div class="col-md-6"></div>
-			<div class="col-md-3">
-				<p class="basket-table-total-price">TOTAL PRICE:</p>
-			</div>
-			<div class="col-md-3">
-				<p class="basket-table-total-price">€<?php echo $order->sum; ?></p>
-			</div>
-			<br>
-			<div class="col-md-3">
-				<a href="index.php?controller=products&action=index" class="btn btn-default">< CONTINUE SHOPPING</a>
-			</div>
-			<div class="col-md-6"></div>
-			<div class="col-md-3">
-				<a href="index.php?controller=orders&action=save_order" class="btn btn-default">CHECKOUT</a>
-			</div>
-		</div>
+				</thead>
+				<tbody>
+					<?php foreach($orders as $order) { ?>
+						<tr>
+							<td><?php echo $order->id; ?></td>
+							<td><?php echo $order->date; ?></td>
+							<td><?php echo $order->getUser(); ?></td>
+							<td><a href="index.php?controller=orders&action=show&id=<?php echo $order->id; ?>">Details</a></td>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+		<?php }?>
+	<?php } else { ?>
+		<h1>Your shopping history</h1>
+		<ol class="breadcrumb">
+			<li><a href="<?php echo $_SERVER['PHP_SELF'];?>">Home</a></li>
+			<li class="active">History</li>	
+		</ol>
+		<?php if (empty($orders)){ ?>
+			<h3>You have not saved any orders </h3>
+		<?php } else { ?>
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="col-md-3">Order ID</th>
+						<th class="col-md-3">Date</th>
+						<th class="col-md-3">Details</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($orders as $order) { ?>
+						<tr>
+							<td><?php echo $order->id; ?></td>
+							<td><?php echo $order->date; ?></td>
+							<td><a href="index.php?controller=orders&action=show&id=<?php echo $order->id; ?>">Details</a></td>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+		<?php } ?>	
 	<?php } ?>
 </div>

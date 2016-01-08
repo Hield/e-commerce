@@ -28,14 +28,16 @@
 			<!-- Left navigation bar -->
 		
 			<ul class="nav navbar-nav">
-				<li class="<?php if (isset($_GET["action"]) && $_GET["action"] == "home") { echo "active";}	else if (!isset($_GET["action"])) {echo "active";}?>"><a href="<?php getLink('pages','home'); ?>">Home</a></li>
-				<li class="<?php if (isset($_GET["controller"]) && $_GET["controller"]=="products"){ echo "active";} ?>"><a href="<?php getLink('products','index'); ?>">Products</a></li>
+				<li class="<?php if (checkActive('pages', 'home')) { echo "active"; } ?>"><a href="<?php getLink('pages','home'); ?>">Home</a></li>
+				<li class="<?php if (checkActive('products', 'index')) { echo "active"; } ?>"><a href="<?php getLink('products','index'); ?>">Products</a></li>
 				<?php if (isset($_SESSION["id"])){ ?>
-					<li class="<?php if (isset($_GET["controller"]) && $_GET["controller"]=="orders" && $_GET["action"]=="index"){ echo "active"; } ?>"><a href="<?php getLink('orders', 'index'); ?>">Basket</a></li>
-					<li class=""><a href="">History</a></li>
+					<?php if (!isAdmin()) { ?>
+						<li class="<?php if (checkActive('orders', 'show') && !isset($_GET['id']) ) { echo "active"; } ?>"><a href="<?php getLink('orders', 'show'); ?>">Basket</a></li>
+					<?php } ?>
+					<li class="<?php if (checkActive('orders', 'index')) { echo "active"; } if (isAdmin()){ if (checkActive('orders', 'show')) { echo "active"; } } else { if (checkActive('orders', 'show') && isset($_GET['id'])) { echo "active"; } } ?>"><a href="<?php getLink('orders', 'index') ?>"><?php if ($_SESSION['permission'] == "admin"){ echo "Orders history"; } else { echo "Shopping History"; } ?></a></li>
 				<?php } ?>
-				<li class="<?php if (isset($_GET["action"]) && $_GET["action"]=="about"){ echo "active";} ?>"><a href="<?php getLink('pages','about'); ?>">About</a></li>
-				<li class="<?php if (isset($_GET["action"]) && $_GET["action"]=="contact"){ echo "active";} ?>"><a href="<?php getLink('pages','contact'); ?>">Contact</a></li>
+				<li class="<?php if (checkActive('pages', 'about')) { echo "active"; } ?>"><a href="<?php getLink('pages','about'); ?>">About</a></li>
+				<li class="<?php if (checkActive('pages', 'contact')) { echo "active"; } ?>"><a href="<?php getLink('pages','contact'); ?>">Contact</a></li>
 			</ul>
 			
 			<!-- Right navigation bar -->
@@ -46,6 +48,11 @@
 				?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<?php if ($_SESSION['permission'] == "admin") {?>
+									<span class="label label-success">Admin</span> 
+								<?php } else { ?>
+									<span class="label label-primary">User</span> 
+								<?php }?>
 								<?php echo $_SESSION["username"]; ?>
 								<span class="caret"></span>
 							</a>
@@ -67,6 +74,7 @@
 			</ul>
 			
 			<!-- add search form -->
+			<!--
             <form class="navbar-form navbar-right" role="search">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search this site">
@@ -77,7 +85,7 @@
                     </span>
                 </div>
             </form>
-			
+			-->
 			
 		</div>
 	</div>

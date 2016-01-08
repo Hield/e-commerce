@@ -32,7 +32,6 @@
 	
 	// we're adding an entry for the new controller and its actions
 	$controllers = array('pages'    => ['home','about','contact','error'],
-						 'posts'    => ['index','show'],
 						 'users'    => ['login','register','account','personal','setting','set_permission','change_info', 'change_password'],
 						 'products' => ['index', 'show', 'new', 'edit', 'create', 'update', 'destroy'],
 						 'orders'   => ['index', 'show', 'create', 'save_order']);

@@ -2,20 +2,38 @@
 	class OrdersController{
 
 		public function index(){
-			$order = null;
-			if (isset($_SESSION['orderID'])){
-				$order = Order::find($_SESSION['orderID']);
-			}
+			$orders = Order::all();
 			require_once('views/orders/index.php');
 		}
 
 		public function show(){
-			if (!isset($_GET['id'])){
-				return call('pages', 'error');
+			if (!isset($_SESSION['id'])){
+				return false;
 			}
 			$order = null;
-			if ($_SESSION['permission'] = "admin" || $_SESSION['orderID'] == $_GET['id']){
+			if (isAdmin()){
+				if (!isset($_GET['id'])){
+					return call('pages', 'error');
+				}
 				$order = Order::find($_GET['id']);
+			} else {
+				if (isset($_SESSION['orderID'])){
+					if (!isset($_GET['id'])){
+						$order = Order::find($_SESSION['orderID']);
+					} else {
+						if (Order::isSaved($_GET['id'])){
+							$order = Order::find($_GET['id']);
+						} else {
+							return call('pages', 'error');
+						}
+					}
+				} else {
+					if (isset($_GET['id'])){
+						if (Order::isSaved($_GET['id'])){
+							$order = Order::find($_GET['id']);
+						}
+					}
+				}
 			}
 			require_once('views/orders/show.php');
 		}
@@ -50,6 +68,7 @@
 				return call('pages', 'error');
 			}
 			Order::saveOrder($_SESSION['orderID']);
+			unset($_SESSION['orderID']);
 			$_SESSION['notice'] = "Orders saved";
 			header("Location: index.php?controller=products&action=index");
 		}

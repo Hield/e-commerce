@@ -1,8 +1,8 @@
+DROP TABLE IF EXISTS order_details;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS personal_infos;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS order_details;
-DROP TABLE IF EXISTS personal_infos;
 
 CREATE TABLE users
 (
@@ -24,8 +24,11 @@ date DATE NOT NULL,
 PRIMARY KEY (id)
 );
 
-INSERT INTO products(name, img_src, price, description) VALUES('shirt', 'http://www.fellsman.org.uk/wp-content/uploads/2013/04/POLO-SHIRT-ROYAL-BLUE.jpg', 24.99, 'Some shirt from Vietnam');
-INSERT INTO products(name, img_src, price, description) VALUES('pants', 'http://cdn.fluidretail.net/customers/c1500/P51050/P51050_pdp/zoom_variation_251_view_A_2192x2200.jpg', 19.99, 'Some pants from Finland');
+INSERT INTO products(name, img_src, price, description, date) VALUES('shirt', 'http://www.fellsman.org.uk/wp-content/uploads/2013/04/POLO-SHIRT-ROYAL-BLUE.jpg', 24.99, 'Some shirt from Vietnam', CURDATE());
+INSERT INTO products(name, img_src, price, description, date) VALUES('pants', 'http://cdn.fluidretail.net/customers/c1500/P51050/P51050_pdp/zoom_variation_251_view_A_2192x2200.jpg', 19.99, 'Some pants from Finland', CURDATE());
+INSERT INTO products(name, img_src, price, description, date) VALUES('shoes', 'http://www.vegetarian-shoes.co.uk/Portals/42/product/images/info/prd0683d04d-faaf-4826-a692-45d2e5cfbe3b.jpg', '14.99', 'Some cool shoes', CURDATE());
+INSERT INTO products(name, img_src, price, description, date) VALUES('chopsticks', 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQgg5mSHzZWU_OLYNtp0ENKYAMaB_RyYAfBQrVsLqgj52Vsd18-GdGdhZg', 5.99, 'Asian chopsticks', CURDATE());
+INSERT INTO products(name, img_src, price, description, date) VALUES('coat', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScqcynOfHVbaBINy7cw6r9a9CHVoKfEkDD4yiS7ZzuBSJnH-KJ63313F4', 59.99, 'Warm coat', CURDATE());
 
 CREATE TABLE personal_infos
 (
@@ -35,7 +38,7 @@ lastname VARCHAR(30),
 email VARCHAR(255),
 phone VARCHAR(30),
 address VARCHAR(255),
-FOREIGN KEY (id) REFERENCES users(id)
+FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE orders
@@ -45,7 +48,7 @@ date DATE NOT NULL,
 userid INT NOT NULL,
 state VARCHAR(255) NOT NULL DEFAULT 'temporary',
 PRIMARY KEY(id),
-FOREIGN KEY (userid) REFERENCES users(id)
+FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE order_details
@@ -55,6 +58,6 @@ productid INT NOT NULL,
 unitprice DECIMAL(5,2) NOT NULL,
 quantity INT NOT NULL,
 discount INT,
-FOREIGN KEY (orderid) REFERENCES orders(id),
-FOREIGN KEY (productid) REFERENCES products(id)
+FOREIGN KEY (orderid) REFERENCES orders(id) ON DELETE CASCADE, 
+FOREIGN KEY (productid) REFERENCES products(id) ON DELETE CASCADE
 );

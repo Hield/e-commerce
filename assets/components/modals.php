@@ -97,7 +97,7 @@
 						<label for="modal-product-password">Confirm password: </label>
 						<input type="password" class="form-control" name="pwd" id="modal-product-password">
 					</div>
-					<button type="submit" class="btn btn-default">Add product</button>
+					<button type="submit" class="btn btn-primary">Add product</button>
 				</form>
 			</div>
 					
@@ -121,14 +121,20 @@
 			</div>
 
 			<div class="modal-body">
-				<p>Are you sure you want to delete this product?
-				</p>
-				<p>This action cannot be reversed!
-				</p>
+				<p><b>Are you sure you want to delete this product?</b></p>
+				<p><b>This action cannot be reversed!</b></p>
+				<p><b>Deleting the product will delete every orders related to it.</b></p>
+				<form method="post" action ="<?php getLink('products','destroy'); ?>">
+					<div class="form-group">
+						<label for="modal-product-delete-password">Confirm password: </label>
+						<input type="password" class="form-control" name="pwd" id="modal-product-delete-password">
+					</div>
+					<input id="modal-product-delete-id" type="hidden" name="product_id">
+					<button type="submit" class="product-del-btn btn btn-danger">Delete</button>
+				</form>
 			</div>
 						
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Yes</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			</div>
 

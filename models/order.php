@@ -9,7 +9,6 @@
 		public $username;
 
 		public function __construct($id, $date, $userID){
-			require_once('models/order_detail.php');
 			$this->id = $id;
 			$this->date = $date;
 			$this->userID = $userID;

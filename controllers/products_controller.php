@@ -30,8 +30,13 @@
 		}
 
 		public function destroy(){
-			if (!isset($_POST['product_id'])){
+			if (!isset($_POST['product_id']) || !isset($_POST['pwd'])){
 				return call('pages','error');
+			}
+			require_once('models/user.php');
+			if (!User::find($_SESSION['username'], $_POST['pwd'])){
+				$_SESSION['alert'] = "Wrong password!";
+				return header("Location: index.php?controller=products&action=index"); 
 			}
 			$id = intval($_POST['product_id']);
 			Product::destroy($_POST['product_id']);

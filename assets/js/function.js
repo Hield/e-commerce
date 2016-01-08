@@ -45,6 +45,6 @@ $(document).ready(function(){
 		$(".modal-show-product-date").html($(this).find(".thumbnail-date").html());
 		$(".modal-show-product-id").val($(this).find(".thumbnail-id").html());
 		$(".modal-show-product-price").val($(this).find(".thumbnail-hidden-price").html());
+		$("#modal-product-delete-id").val($(this).find(".thumbnail-id").html());
 	});
-	
 });

@@ -57,7 +57,7 @@
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="<?php getLink('users','account'); ?>">Account</a></li>
+								<!-- <li><a href="<?php getLink('users','account'); ?>">Account</a></li> -->
 								<li><a href="<?php getLink('users','personal'); ?>">Personal Info</a></li>
 								<li><a href="<?php getLink('users','setting'); ?>">Setting</a></li>
 								<li><a href="<?php echo $_SERVER['PHP_SELF']; echo "?logout"; ?>">Logout</a></li>
@@ -66,7 +66,7 @@
 				<?php
 					} else {
 				?>
-						<li><a href="#" data-toggle="modal" data-target="#loginForm">Login</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#loginForm">Login / Register</a></li>
 				<?php
 					}
 				?>

@@ -21,14 +21,13 @@
 				<form id="modal-loginForm" role="form" action="index.php?controller=users&action=login" method="post">
 					<div class="form-group">
 						<label for="modal-login-username">Username: </label>
-						<span id="modal-login-username-error"></span>
 						<input type="text" class="form-control" name="username" id="modal-login-username">
 					</div>
 					<div class="form-group">
 						<label for="modal-login-pwd">Password: </label>
-						<span id="modal-login-pwd-error"></span>
 						<input type="password" class="form-control" name="pwd" id="modal-login-pwd">
 					</div>
+					<div id="modal-login-error"></div>
 					<button type="submit" class="btn btn-default">Login</button>
 					<a href="#" id="modal-registerLink"><p>Register</p></a>
 				</form>

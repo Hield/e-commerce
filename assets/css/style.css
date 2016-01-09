@@ -19,6 +19,12 @@ html{
     float: right;
 }
 
+#modal-login-error {
+    height: 18px;
+    margin-bottom: 12px;
+}
+
+
 /* CAROUSEL */
 
 #carouselContainer {

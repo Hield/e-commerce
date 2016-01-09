@@ -6,8 +6,7 @@ $(document).ready(function(){
 		$("#modal-loginForm").hide();
 		$("#modal-registerForm").show();
 		$("#modal-loginForm")[0].reset(); //Take in Use JavaScript not JQuery
-		clearErrorMsg($("#modal-login-username-error"));
-		clearErrorMsg($("#modal-login-pwd-error"));
+		clearErrorMsg($("#modal-login-error"));
 		$("#modal-formTitle").html("Register");
 	});
 

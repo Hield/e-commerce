@@ -108,7 +108,7 @@ $(document).ready(function(){
 
 	/*--- Check username for register form ---*/
 
-	$("#modal-register-username").keyup( function(){
+	$("#modal-register-username").change( function(){
 		usernameStatus = false; //Global variable
 		var username = $(this).val();
 		var err_el = $("#modal-register-username-error");
@@ -127,13 +127,13 @@ $(document).ready(function(){
 
 	});
 
-	/*--- Check password for register form ---*/
+	/*Clear the error message for password in register form*/
 
-	$("#modal-register-pwd").keyup( function() {
-		pwdStatus = pwdCheck($(this).val(),  $("#modal-register-pwd-error"));
+	$("#modal-register-pwd").change( function(){
+		clearErrorMsg($("#modal-register-pwd-error"));
 	});
 
-	/*---- Check if input is empty when submitting register form----*/
+	/*---- Check password and input when submitting register form----*/
 
 	$("#modal-registerForm").submit( function() {
 		var username = $("#modal-register-username").val();
@@ -143,13 +143,17 @@ $(document).ready(function(){
 
 		if (username === "") {
 			showError(err_el1, "(Username is empty)");
-			if (pwd === ""){
+			if (pwd === "") { 
 				showError(err_el2, "(Password is empty)");
 			}
 			return (usernameStatus && pwdStatus);
 		}
 		else if (pwd === ""){
 			showError(err_el2, "(Password is empty)");
+			return (usernameStatus && pwdStatus);
+		}
+		else if (username != "" && pwd != "") {
+			pwdStatus = pwdCheck(pwd, err_el2);
 			return (usernameStatus && pwdStatus);
 		}
 		else 
@@ -162,8 +166,6 @@ $(document).ready(function(){
 		usernameStatus = false;
 		var username = $(this).val();
 		var httpRequest = userCheck(username, "");
-
-		clearErrorMsg($("#modal-login-username-error"));
 
 		httpRequest
 				.done(function (data) {
@@ -183,8 +185,6 @@ $(document).ready(function(){
 		var pwd = $(this).val();
 		var httpRequest = userCheck(username, pwd);
 
-		clearErrorMsg($("#modal-login-pwd-error"));
-
 		if(usernameStatus == true){
 			httpRequest
 					.done(function (data) {
@@ -200,33 +200,14 @@ $(document).ready(function(){
 	/*---- Check input before submitting  login form----*/
 
 	$("#modal-loginForm").submit( function() {
-		var username = $("#modal-login-username").val();
-		var pwd = $("#modal-login-pwd").val();
-		var err_el1 = $("#modal-login-username-error");
-		var err_el2 = $("#modal-login-pwd-error");
+		var err_el = $("#modal-login-error");
 
-		clearErrorMsg(err_el1);
-		clearErrorMsg(err_el2);
-
-		if (username === "") {
-			showError(err_el1, "(Username is empty)");
-			if (pwd === "") {
-				showError(err_el2, "(Password is empty)");
-			}
+		console.log(usernameStatus+", "+pwdStatus);
+		if (!usernameStatus || !pwdStatus) {
+			showError(err_el, "(Incorrect username and/or password)");
 			return (usernameStatus && pwdStatus);
 		}
-		else if (!usernameStatus) {
-			showError(err_el1, "(Username does not exist)");
-			return (usernameStatus && pwdStatus);
-		}
-		else if (pwd == "") {
-			showError(err_el2, "(Password is empty)");
-			return (usernameStatus && pwdStatus);
-		}
-		else if (usernameStatus && !pwdStatus) {
-			showError(err_el2, "(Password does not match)");
-			return (usernameStatus && pwdStatus);
-		} else
+		else
 			return (usernameStatus && pwdStatus);
 		
 	});

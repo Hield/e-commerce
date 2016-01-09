@@ -6,8 +6,8 @@ $(document).ready(function(){
 		$("#modal-loginForm").hide();
 		$("#modal-registerForm").show();
 		$("#modal-loginForm")[0].reset(); //Take in Use JavaScript not JQuery
-		clearErrorMsg($("#err-msg-username-login"));
-		clearErrorMsg($("#err-msg-pwd-login"));
+		clearErrorMsg($("#modal-login-username-error"));
+		clearErrorMsg($("#modal-login-pwd-error"));
 		$("#modal-formTitle").html("Register");
 	});
 
@@ -15,8 +15,8 @@ $(document).ready(function(){
 		$("#modal-loginForm").show();
 		$("#modal-registerForm").hide();
 		$("#modal-registerForm")[0].reset(); //Take in Use JavaScript not JQuery
-		clearErrorMsg($("#err-msg-username-register"));
-		clearErrorMsg($("#err-msg-pwd-register"));
+		clearErrorMsg($("#modal-register-username-error"));
+		clearErrorMsg($("#modal-register-pwd-error"));
 		$("#modal-formTitle").html("Login");
 	});
 

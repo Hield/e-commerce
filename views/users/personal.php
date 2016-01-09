@@ -123,7 +123,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-sm-offset-3 err-msg" id="err-change-password-form"></div>
+							<div class="col-sm-offset-3 err-msg" id="change-password-form-error"></div>
 							<div class="col-sm-offset-3 col-sm-5">
 								<button type="submit" class="btn btn-default">Change password</button>
 							</div>

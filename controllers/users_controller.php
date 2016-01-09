@@ -91,7 +91,7 @@
 			if ($_POST['old-password'] == "" || $_POST['new-password'] == "" || $_POST['new-password-again'] == ""){
 				$_SESSION['notice'] = "Password change is not successful! (All the input fields were empty)!";
 			}
-			else if ($_POST['old-password'] != $user->pwd) {
+			else if (sha1($_POST['old-password']) != $user->pwd) {
 				$_SESSION['notice'] = "Password change is not successful! (Old password was incorrect)";
 
 			}
@@ -99,7 +99,7 @@
 				$_SESSION['notice'] = "Password change is not successful! (Retyped password field did not match)";
 			}
 			else {
-				User::update_password($_SESSION['username'], $_POST['new-password']);
+				User::change_password($_SESSION['username'], $_POST['new-password']);
 				$_SESSION['notice'] = "Change password successfully!";
 			}
 			return header("Location: index.php?controller=users&action=personal");

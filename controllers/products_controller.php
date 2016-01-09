@@ -15,7 +15,7 @@
 		}
 
 		public function create(){
-			if (!isset($_POST['name']) || !isset($_POST['price']) || !isset($_POST['description']) || !isset($_POST['pwd']) || !isset($_POST['img_src'])){
+			if (!isset($_POST['name']) || !isset($_POST['price']) || !isset($_POST['description']) || !isset($_POST['pwd']) || !isset($_POST['img_src']) || !isset($_POST['date'])){
 				return call('pages','error');
 			}
 			require_once('models/user.php');
@@ -24,7 +24,7 @@
 				return header("Location: index.php?controller=products&action=index"); 
 			}
 			$price = floatval($_POST['price']);
-			Product::create($_POST['name'], $_POST['img_src'], $price, $_POST['description']);
+			Product::create($_POST['name'], $_POST['img_src'], $price, $_POST['description'], $_POST['date']);
 			$_SESSION['notice'] = "Added product successfully!";
 			header("Location: index.php?controller=products&action=index");
 		}

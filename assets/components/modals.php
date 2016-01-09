@@ -94,6 +94,10 @@
 						<textarea class="form-control" name="description" id="modal-product-description" rows="5"></textarea> 
 					</div>
 					<div class="form-group">
+						<label for="modal-product-date">Manufacturing date: </label>
+						<input type="date" class="form-control" name="date" id="modal-product-date">
+					</div>
+					<div class="form-group">
 						<label for="modal-product-password">Confirm password: </label>
 						<input type="password" class="form-control" name="pwd" id="modal-product-password">
 					</div>

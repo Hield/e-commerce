@@ -38,10 +38,10 @@
 			return new Product($product['id'], $product['name'], $product['img_src'], $product['price'], $product['description'], $product['date']); 
 		}
 
-		public static function create($name, $img_src, $price, $description){
+		public static function create($name, $img_src, $price, $description, $date){
 			$db = Db::getInstance();
-			$req = $db->prepare('INSERT INTO products(name, img_src, price, description, date) VALUES(:name, :img_src, :price, :description, CURDATE())');
-			$req->execute(array('name' => $name, 'img_src' => $img_src, 'price' => $price, 'description' => $description));
+			$req = $db->prepare('INSERT INTO products(name, img_src, price, description, date) VALUES(:name, :img_src, :price, :description, :date)');
+			$req->execute(array('name' => $name, 'img_src' => $img_src, 'price' => $price, 'description' => $description, ':date' => $date));
 		}
 
 		public static function destroy($id){

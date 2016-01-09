@@ -63,7 +63,7 @@
 			}
 			require_once('models/order_detail.php');
 			if (OrderDetail::check($_SESSION['orderID'], $_POST['product_id'])){
-				OrderDetail::setQuantity($_SESSION['orderID'], $_POST['product_id'], $_POST['quantity']);
+				OrderDetail::addQuantity($_SESSION['orderID'], $_POST['product_id'], $_POST['quantity']);
 			} else {
 				OrderDetail::create($_SESSION['orderID'], $_POST['product_id'], $_POST['product_price'], $_POST['quantity']);
 			}	
@@ -79,6 +79,24 @@
 			unset($_SESSION['orderID']);
 			$_SESSION['notice'] = "Orders saved";
 			header("Location: index.php?controller=products&action=index");
+		}
+
+		public function change_quantity(){
+			if (!isset($_POST['quantity']) || !isset($_POST['productID']) | !isset($_POST['orderID'])){
+				return call('pages', 'error');
+			}
+			require_once('models/order_detail.php');
+			OrderDetail::setQuantity($_POST['orderID'], $_POST['productID'], $_POST['quantity']);
+			header("Location: index.php?controller=orders&action=show");
+		}
+
+		public function destroy(){
+			if (!isset($_POST['orderID']) || !isset($_POST['productID'])){
+				return call('pages', 'error');
+			}
+			require_once('models/order_detail.php');
+			OrderDetail::destroy($_POST['orderID'], $_POST['productID']);
+			header("Location: index.php?controller=orders&action=show");
 		}
 	}
 ?>

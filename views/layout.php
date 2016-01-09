@@ -29,7 +29,7 @@
 			</div>
 		</footer>
 
-
+		<?php $_SESSION['actual_link'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>
 		<?php require_once('assets/components/modals.php'); ?>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

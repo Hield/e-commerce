@@ -34,7 +34,7 @@
 	$controllers = array('pages'    => ['home','about','contact','error'],
 						 'users'    => ['login','register','account','personal','setting','set_permission','change_info', 'change_password'],
 						 'products' => ['index', 'show', 'new', 'edit', 'create', 'update', 'destroy'],
-						 'orders'   => ['index', 'show', 'create', 'save_order']);
+						 'orders'   => ['index', 'show', 'create', 'save_order', 'change_quantity', 'destroy']);
 		
 	if (array_key_exists($controller, $controllers)){
 		if (in_array($action, $controllers[$controller])){

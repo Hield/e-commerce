@@ -47,4 +47,49 @@ $(document).ready(function(){
 		$(".modal-show-product-price").val($(this).find(".thumbnail-hidden-price").html());
 		$("#modal-product-delete-id").val($(this).find(".thumbnail-id").html());
 	});
+
+	//----- Change quantity in basket -----//
+
+	$(".btn-number").click(function(e){
+		e.preventDefault();
+
+		fieldName = $(this).attr('data-field');
+		type = $(this).attr('data-type');
+
+		var input = $('input[id="' + fieldName + '"]');
+		var currentVal = parseInt(input.val());
+
+		if (!isNaN(currentVal)){
+			if (currentVal < 1){
+				input.val(1);
+			} else {
+				if (type == 'minus'){
+					if (currentVal > input.attr('min')){
+						input.val(currentVal - 1);
+					}
+					if (parseInt(input.val()) == input.attr('min')){
+						$(this).attr('disabled', true);
+					}
+				} else if (type == 'plus'){
+					input.val(currentVal + 1);
+					$(this).parent().prev().prev().find(".btn").attr("disabled", false);
+				}
+			}
+		} else {
+			input.val(1);
+		}
+	});
+
+	$(".js-basket-change-quantity-form").submit(function(){
+		var input = $(this).find("input").val();
+		if (isNaN(input)){
+			$(this).find(".js-basket-change-quantity-alert").html("Please input a correct number");
+			return false;
+		}
+		if (input < 1){
+			$(this).find(".js-basket-change-quantity-alert").html("Please input a correct number");
+			return false;
+		}
+		return true;
+	});
 });

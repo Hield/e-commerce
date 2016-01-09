@@ -50,13 +50,30 @@
 			}
 		}
 
-		public static function setQuantity($orderID, $productID, $quantity){
+		public static function addQuantity($orderID, $productID, $quantity){
 			$db = Db::getInstance();
 			$orderID = intval($orderID);
 			$productID = intval($productID);
 			$quantity = intval($quantity);
 			$req = $db->prepare('UPDATE order_details SET quantity = quantity + :quantity WHERE orderid = :orderid AND productid = :productid');
 			$req->execute(array('quantity' => $quantity, 'orderid' => $orderID, 'productid' => $productID));
+		}
+
+		public static function setQuantity($orderID, $productID, $quantity){
+			$db = Db::getInstance();
+			$orderID = intval($orderID);
+			$productID = intval($productID);
+			$quantity = intval($quantity);
+			$req = $db->prepare('UPDATE order_details SET quantity = :quantity WHERE orderid = :orderid AND productid = :productid');
+			$req->execute(array('quantity' => $quantity, 'orderid' => $orderID, 'productid' => $productID));
+		}
+
+		public static function destroy($orderID, $productID){
+			$db = Db::getInstance();
+			$orderID = intval($orderID);
+			$productID = intval($productID);
+			$req = $db->prepare('DELETE FROM order_details WHERE orderid = :orderid AND productid = :productid');
+			$req->execute(array(':orderid' => $orderID, ':productid' => $productID));
 		}
 	}	
 ?>

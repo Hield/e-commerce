@@ -114,8 +114,33 @@
 								<p class="basket-table-name"><?php echo $order_detail->product->name ?></p>
 								<p  class="basket-table-description"><b>Description:</b> <?php echo $order_detail->product->description ?></p>
 								<p  class="basket-table-description"><b>Manufacturing date:</b> <?php echo $order_detail->product->date ?></p>
+								<form role="form" method="post" action="index.php?controller=orders&action=destroy">
+									<input hidden name="orderID" value="<?php echo $order_detail->orderID; ?>">
+									<input hidden name="productID" value="<?php echo $order_detail->product->id; ?>"> 
+									<button type="submit" class="btn btn-default">Remove</button>
+								</form>
 							</td>
-							<td class="basket-table-quantity"><?php echo $order_detail->quantity ?></td>
+							<td class="basket-table-quantity">
+								<form class="js-basket-change-quantity-form" method="post" action="index.php?controller=orders&action=change_quantity">
+									<div class="input-group css-basket-change-quantity-input">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default btn-number js-basket-change-quantity-minus" <?php if ($order_detail->quantity <= 1) { echo 'disabled="disabled"'; } ?> data-type="minus" data-field="basket-quantity-product-<?php echo $order_detail->product->id ?>">
+												<span class="glyphicon glyphicon-minus"></span>
+											</button>
+										</span>
+										<input type="text" name="quantity" id="basket-quantity-product-<?php echo $order_detail->product->id ?>" class="form-control input-number" value="<?php echo $order_detail->quantity ?>" min="1">
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default btn-number" data-type="plus" data-field="basket-quantity-product-<?php echo $order_detail->product->id ?>">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									</div>
+									<span class="js-basket-change-quantity-alert"></span>
+									<input hidden name="orderID" value="<?php echo $order_detail->orderID; ?>">
+									<input hidden name="productID" value="<?php echo $order_detail->product->id; ?>">
+									<button class="btn btn-default js-basket-change-quantity-btn">Change</button>
+								</form>								
+							</td>
 							<td class="basket-table-price">€<?php echo $order_detail->quantity * $order_detail->unitPrice; ?></td>
 						</tr>
 					<?php } ?>

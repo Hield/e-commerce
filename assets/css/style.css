@@ -199,6 +199,15 @@ img{
     font-size:25px;
 }
 
+.css-basket-change-quantity-input{
+    width:130px;
+}
+
+.js-basket-change-quantity-alert{
+    color:red;
+    font-size:15px;
+}
+
 /* STYLE FOR SPAN ELEMENT IN personal.php */
 .err-msg{
     padding-left: 15px;
@@ -231,7 +240,6 @@ img{
     padding: 2em 5%;
 
 }
-
 
 .bg-3{
     background: #7D1935;

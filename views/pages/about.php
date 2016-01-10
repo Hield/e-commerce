@@ -42,7 +42,7 @@
 		<div class="container-fluid bg-3">
 			<div class="row">
 				<div class="col-sm-4 img-author">
-					 <img src="assets/img/slider1.png">
+					 <img src="assets/img/author_3.jpg">
 				</div>
 				<div class="col-sm-8">
 					<h1>TRI TRAN</h1>

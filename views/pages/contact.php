@@ -21,7 +21,7 @@
 	</div>
 
 	<div class="container-fluid bg-2">
-			<div class="row">
+		<div class="row">
 			<div class="col-sm-4 img-author">
 				 <img src="assets/img/author_2.jpg">
 			</div>
@@ -29,13 +29,13 @@
 				<h1>LIEU VU</h1>
 				<p>Address: Kääpiöidenpolku 4 B 36 00820 Helsinki</p>
 				<p>Email: dinhlieuvu@gmail.com</p>
-				<p>Mobile: +358 442 099 588</p>
+				<p>Mobile: +358 44 209 9588</p>
 			</div>
-		</div> <!--end bg-1 -->
-		</div> <!--end bg-2 -->
+		</div>
+	</div> <!--end bg-2 -->
 		
-		<div class="container-fluid bg-3">
-			<div class="row">
+	<div class="container-fluid bg-3">
+		<div class="row">
 			<div class="col-sm-4 img-author">
 				<img src="assets/img/author_3.jpg">
 			</div>
@@ -43,8 +43,8 @@
 				<h1>TRI TRAN</h1>
 				<p>Address: Avaruuskatu 4C 36, 02210 Espoo</p>
 				<p>Email: tvtri96@gmail.com</p>
-				<p>Mobile: +358 4657 44330</p>
+				<p>Mobile: +358 46 574 4330</p>
 			</div>
-		</div> <!--end bg-1 -->
-		</div> <!--end bg-3 -->
+		</div>
+	</div> <!--end bg-3 -->
 </div>

@@ -247,6 +247,10 @@ img{
 
 }
 
+.bg-2 p{
+    font-size: 1em;
+}
+
 .bg-3{
     background: #7D1935;
     color: #ffffff;
@@ -254,18 +258,15 @@ img{
     margin-bottom: 5em;
 }
 
-.logo2 {
-    font-size: 1.5em !important;
-}
-
-.partnerlogo{
-    padding: 1em 0;
+.bg-3 p{
+    font-size: 1em;
 }
 
 .img-author {
 	margin-top: 27px;
 	padding-right: 30px !important;
 }
+
 /* make sidebar nav vertical */
 
 @media (min-width: 768px) {

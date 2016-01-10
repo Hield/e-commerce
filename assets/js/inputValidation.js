@@ -78,6 +78,7 @@ function pwdCheck(pwd0, err_el0) {
 	return pwdStatus;
 }
 
+
 /* ----- Global Variable -----*/
 
 var usernameStatus= false;
@@ -106,28 +107,31 @@ $(document).ready(function(){
 		content: 'Password must have at least 7 characters and contain: a capital letter(A-Z), a small letter(a-z) and a number(0-9)'
 	});
 
+	
+	/****** REGISTER FORM *****/
+
 	/*--- Check username for register form ---*/
 
 	$("#modal-register-username").change( function(){
 		usernameStatus = false; //Global variable
 		var username = $(this).val();
-		var err_el = $("#modal-register-username-error");
+		var err_msg = $("#modal-register-username-error");
 		var httpRequest = userCheck(username, "");
 
 		httpRequest
 				.done(function(data) {
 					if (data.split(",")[0] == 1) {
-						showError(err_el, "(Username is already taken)");
+						showError(err_msg, "(Username is already taken)");
 					}
 					else if ((data.split(",")[0]) == 0) {
 						usernameStatus = true;
-						clearErrorMsg(err_el);
+						clearErrorMsg(err_msg);
 					}
 				});
 
 	});
 
-	/*Clear the error message for password in register form*/
+	/*--- Clear the error message for password in register form ---*/
 
 	$("#modal-register-pwd").change( function(){
 		clearErrorMsg($("#modal-register-pwd-error"));
@@ -138,103 +142,74 @@ $(document).ready(function(){
 	$("#modal-registerForm").submit( function() {
 		var username = $("#modal-register-username").val();
 		var pwd = $("#modal-register-pwd").val();
-		var err_el1 = $("#modal-register-username-error");
-		var err_el2 = $("#modal-register-pwd-error");
+		var err_msg_1 = $("#modal-register-username-error");
+		var err_msg_2 = $("#modal-register-pwd-error");
 
 		if (username === "") {
-			showError(err_el1, "(Username is empty)");
+			showError(err_msg_1, "(Username is empty)");
 			if (pwd === "") { 
-				showError(err_el2, "(Password is empty)");
+				showError(err_msg_2, "(Password is empty)");
 			}
 			return (usernameStatus && pwdStatus);
 		}
 		else if (pwd === ""){
-			showError(err_el2, "(Password is empty)");
+			showError(err_msg_2, "(Password is empty)");
 			return (usernameStatus && pwdStatus);
 		}
 		else if (username != "" && pwd != "") {
-			pwdStatus = pwdCheck(pwd, err_el2);
+			pwdStatus = pwdCheck(pwd, err_msg_2);
 			return (usernameStatus && pwdStatus);
 		}
 		else 
 			return (usernameStatus && pwdStatus);
 	});
 
-	/*--- Check username for login form ---*/
+	/****** LOGIN FORM *****/
 
-	$("#modal-login-username").keyup(function(){
-		usernameStatus = false;
-		var username = $(this).val();
-		var httpRequest = userCheck(username, "");
-
-		httpRequest
-				.done(function (data) {
-					if(data.split(",")[0] == 0) {
-					}
-					else if(data.split(",")[0] == 1) {
-						usernameStatus = true;
-					}
-				});
-	});
-
-	/*--- Check password for login form ---*/
-
-	$("#modal-login-pwd").keyup(function(){
-		pwdStatus = false;
-		var username = $("#modal-login-username").val();
-		var pwd = $(this).val();
-		var httpRequest = userCheck(username, pwd);
-
-		if(usernameStatus == true){
-			httpRequest
-					.done(function (data) {
-						if(data.split(",")[1] == 0) {
-						}
-						else if(data.split(",")[1] == 1){
-							pwdStatus = true;
-						}
-					});
-		}
-	});
-
-	/*---- Check input before submitting  login form----*/
-
+	/*---- Check input when submitting login form----*/
+		
 	$("#modal-loginForm").submit( function() {
-		var err_el = $("#modal-login-error");
+		var username = $("#modal-login-username").val();
+		var pwd = $("#modal-login-pwd").val();
+		var loginForm = $("#modal-loginForm");
+		var httpRequest;
+		var err_msg = $("#modal-login-error");
+		var msg = "(Incorrect username andd/or password)";
 
-		console.log(usernameStatus+", "+pwdStatus);
-		if (!usernameStatus || !pwdStatus) {
-			showError(err_el, "(Incorrect username and/or password)");
-			return (usernameStatus && pwdStatus);
+		if(username === "" || pwd === "") {
+			showError(err_msg, msg);
+			return false;
 		}
-		else
-			return (usernameStatus && pwdStatus);
+		else 
+			return true;
 		
 	});
 
-	/*--- Check password in user change password form---*/
+	/****** CHANGE PASSWORD FORM *****/
 
-	$("#personal-new-password").keyup( function(){
+	/*--- Check password in 'user change password' form---*/
+
+	$("#personal-new-password").change( function(){
 		var pwd = $(this).val();
-		var err_el = $("#personal-new-password-error");
-		pwdCheck(pwd, err_el);
+		var err_msg = $("#personal-new-password-error");
+		pwdCheck(pwd, err_msg);
 	});
 
-	/*--- Clear the error message when typing again password in user change password form---*/
+	/*--- Clear the error message when typing again password in 'user change password' form---*/
 
-	$("#personal-new-password-again").keyup( function(){
+	$("#personal-new-password-again").change( function(){
 		clearErrorMsg($("#personal-new-password-again-error"));
 	});
 
-	/*--- Check the old password in user change password form---*/
+	/*--- Check the old password in 'user change password form'---*/
 
 	$("#personal-old-password").keyup( function() {
 		var username = $("#username-session").text();
 		var pwd = $(this).val();
-		var err_el = $("#personal-old-password-error");
+		var err_msg = $("#personal-old-password-error");
 		var httpRequest = userCheck(username, pwd);
 
-		clearErrorMsg(err_el);
+		clearErrorMsg(err_msg);
 
 		httpRequest.done( function(data){
 			if(data.split(",")[0] == 1 && data.split(",")[1] == 1) {
@@ -246,42 +221,44 @@ $(document).ready(function(){
 	/*--- Check input before submitting user change password form---*/
 
 	$(".js-change-password-form").submit(function(){
-		var oldPwd = $("#personal-old-password");
-		var newPwd = $("#personal-new-password");
-		var newPwdAgain = $("#personal-new-password-again");
-		var err_el1 = $("#change-password-form-error");
-		var err_el2 = $("#personal-new-password-again-error");
-		var err_el3 = $("#personal-old-password-error");
+		var oldPwd = $("#personal-old-password").val();
+		var newPwd = $("#personal-new-password").val();
+		var newPwdAgain = $("#personal-new-password-again").val();
+		var err_msg_1 = $("#change-password-form-error");
+		var err_msg_2 = $("#personal-new-password-again-error");
+		var err_msg_3 = $("#personal-old-password-error");
 
-		if (oldPwd.val() == "" || newPwd.val() == "" || newPwdAgain.val() == "") {
-			showError(err_el1, "Please fill in all the fields");
+		if (oldPwd == "" || newPwd == "" || newPwdAgain == "") {
+			showError(err_msg_1, "Please fill in all the fields");
 			return false;
 		}
-		else if (newPwd.val() != newPwdAgain.val()){
-			clearErrorMsg(err_el1);
-			showError(err_el2, "Retyped password does not match");
+		else if (newPwd != newPwdAgain){
+			clearErrorMsg(err_msg_1);
+			showError(err_msg_2, "Retyped password does not match");
 			return false;
 		}
 		else if (!changePwdStatus) {
-			clearErrorMsg(err_el1);
-			showError(err_el3, "(Old password is incorrect)");
+			clearErrorMsg(err_msg_1);
+			showError(err_msg_3, "(Old password is incorrect)");
 			return changePwdStatus;
 		}
 		else
 			return  changePwdStatus;
 	});
 
-	$(".js-change-personal-infos-form").submit(function() {
-		var firstName_el = $("#personal-firstname");
-		var lastName_el = $("#personal-lastname");
-		var email_el = $("#personal-email");
-		var phone_el = $("#personal-phone");
-		var address_el = $("#personal-address");
-		var err_el =$("#personal-infos-alert");
+	
+	/****** CHANGE PERSONAL INFO FORM *****/
 
-		if (firstName_el.val() == "" || lastName_el.val() == "" || email_el.val() == "" ||
-			phone_el.val() == "" || address_el.val() == "") {
-			showError(err_el,"(Please fill in all the fields)");
+	$(".js-change-personal-infos-form").submit(function() {
+		var firstName = $("#personal-firstname").val();
+		var lastName = $("#personal-lastname").val();
+		var email = $("#personal-email").val();
+		var phone = $("#personal-phone").val();
+		var address = $("#personal-address").val();
+		var err_msg =$("#personal-infos-alert");
+
+		if (firstName == "" || lastName == "" || email_el == "" || phone == "" || address == "") {
+			showError(err_msg,"(Please fill in all the fields)");
 			return false;
 		}
 		return true;

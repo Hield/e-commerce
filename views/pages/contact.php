@@ -37,13 +37,13 @@
 		<div class="container-fluid bg-3">
 			<div class="row">
 			<div class="col-sm-4 img-author">
-				<img src="assets/img/slider1.png">
+				<img src="assets/img/author_3.jpg">
 			</div>
 			<div class="col-sm-8">
 				<h1>TRI TRAN</h1>
-				<p>Address: </p>
-				<p>Email: </p>
-				<p>Mobile: </p>
+				<p>Address: Avaruuskatu 4C 36, 02210 Espoo</p>
+				<p>Email: tvtri96@gmail.com</p>
+				<p>Mobile: +358 4657 44330</p>
 			</div>
 		</div> <!--end bg-1 -->
 		</div> <!--end bg-3 -->
